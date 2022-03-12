@@ -55,18 +55,19 @@ client.on("message", (message) => {
     } catch (e) {
       message.reply("something went wrong");
     }
-  } else if (message.content.startsWith(PREFIX + "waifu")) {
+  } else if (message.content.startsWith(PREFIX + "anime")) {
     try {
-      get("https://api.waifu.pics/sfw/waifu").then((response) => {
+      get("https://api.jikan.moe/v4/random/characters").then((response) => {
+        message.reply(response.body.data.name);
         message.channel.send({
           files: [
             {
-              attachment: response.body.url,
-              name: `waifu.jpg`,
+              attachment: response.body.data.images.jpg.image_url,
+              name: `anime.jpg`,
             },
           ],
         });
-        console.log("random waifu picture");
+        console.log("random anime picture");
       });
     } catch (e) {
       message.reply("something went wrong");
