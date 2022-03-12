@@ -14,7 +14,7 @@ client.on("message", (message) => {
           files: [
             {
               attachment: response.body.file,
-              name: `cat.${response.body.file.split(".")[4]}`,
+              name: `cat.jpg`,
             },
           ],
         });
@@ -54,6 +54,80 @@ client.on("message", (message) => {
       });
     } catch (e) {
       message.reply("something went wrong");
+    }
+  } else if (message.content.startsWith(PREFIX + "waifu")) {
+    try {
+      get("https://api.waifu.pics/sfw/waifu").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.url,
+              name: `waifu.jpg`,
+            },
+          ],
+        });
+        console.log("random waifu picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
+    }
+  } else if (message.content.startsWith(PREFIX + "fox")) {
+    try {
+      get("https://randomfox.ca/floof").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.image,
+              name: `fox.jpg`,
+            },
+          ],
+        });
+        console.log("random fox picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
+    }
+  } else if (message.content.startsWith(PREFIX + "food")) {
+    try {
+      get("https://foodish-api.herokuapp.com/api").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.image,
+              name: `food.jpg`,
+            },
+          ],
+        });
+        console.log("random food picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
+    }
+  } else if (message.content.startsWith(PREFIX + "meme")) {
+    try {
+      get("https://meme-api.herokuapp.com/gimme").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.url,
+              name: `meme.jpg`,
+            },
+          ],
+        });
+        console.log("random meme picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
+    }
+  }
+  if (message.content.startsWith(PREFIX + "help")) {
+    try {
+      message.reply(
+        "Prefix : + \n" +
+          "cat for cat pictures \ndog for dog \nfox for fox \nmeme for reddit memes \nfood for fooods \nwaifu for anime waifus \nduck for duck pics "
+      );
+    } catch (e) {
+      message.reply("something went wrong, your cat is deed");
     }
   }
 });
