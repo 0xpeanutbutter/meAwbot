@@ -39,6 +39,22 @@ client.on("message", (message) => {
     } catch (e) {
       message.reply("something went wrong");
     }
+  } else if (message.content.startsWith(PREFIX + "duck")) {
+    try {
+      get("https://random-d.uk/api/random").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.url,
+              name: `duck.jpg`,
+            },
+          ],
+        });
+        console.log("random duck picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
+    }
   }
 });
 
