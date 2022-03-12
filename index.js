@@ -21,7 +21,23 @@ client.on("message", (message) => {
         console.log("random cat picture");
       });
     } catch (e) {
-      message.reply("something went wrong, your cat is ded");
+      message.reply("something went wrong, your cat is deed");
+    }
+  } else if (message.content.startsWith(PREFIX + "dog")) {
+    try {
+      get("https://dog.ceo/api/breeds/image/random").then((response) => {
+        message.channel.send({
+          files: [
+            {
+              attachment: response.body.message,
+              name: `dog.jpg`,
+            },
+          ],
+        });
+        console.log("random dog picture");
+      });
+    } catch (e) {
+      message.reply("something went wrong");
     }
   }
 });
